@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- namespace:与当前XML文件对应的JAVA接口 -->
+<mapper namespace="cn.tedu.store.mapper.UserMapper">
+
+	<!-- id:该节点对应的抽象方法的名称 parameterType:对应的抽象方法的参数的数据类型 
+	useGeneratedKeys 表示需要获取自动生成的主健（通常都是自动递增的id） 
+		keyProperty表示获取了主键的值（id的值） -->
+	<!-- 插入用户数据 -->
+	<!-- Integer insert(User user) -->
+	<insert id="insert" parameterType="cn.tedu.store.mapper.UserMapper" useGeneratedKeys="true" 
+	keyProperty="id" >
+	INSERT INTO t_user(id,username,password,email,phone,gender,avatar,salt,status,is_delete,
+	created_user,created_time,modified_user,modified_time)VALUES(#{id},#{username},#{password},#{email},
+	#{phone},#{gender},#{avatar},#{salt},#{status},#{isDelete},
+	#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime})
+	
+	</insert>
+	<!-- 根据用户名查询用户数据 -->
+	<!-- User getUserByUsername(String username) -->
+	<select id="getUserByUsername" resultType="cn.tedu.store.entity.User" >
+	select 
+	id,
+	username,
+	password,
+	email,
+	phone,
+	gender,
+	avatar,
+	salt,
+	status,
+	is_delete as isDelete
+	 from t_user
+	 where 
+	 username=#{username}
+	</select>
+	<!-- 根据id查找用户名 -->
+	<!-- User getUserById(Integer uid) -->
+<select id="getUserById" resultType="cn.tedu.store.entity.User">
+select id,
+	username,
+	password,
+	email,
+	phone,
+	gender,
+	avatar,
+	salt,
+	status,
+	is_delete as isDelete
+	from t_user where
+	id=#{uid}
+
+</select>
+<!-- 修改用户的密码 -->
+<!-- 	Integer changePassword(@Param("uid")Integer uid,@Param("password")String password) -->
+<update id="changePassword" >
+update t_user set password=#{password} where id=#{uid}
+</update>
+<update id="changeInfo" parameterType="cn.tedu.store.entity.User" >
+update t_user 
+set
+<if test="username!=null">
+	username=#{username},
+</if>
+ <if test="gender!=null">gender=#{gender},</if>
+	<if test="avatar!=null">avatar=#{avatar},</if>
+	<if test="phone!=null">phone=#{phone},</if>
+	<if test="email!=null">email=#{email},</if>
+	modified_time=#{modifiedTime},
+	modified_user=#{modifiedUser}
+	where id=#{id}
+</update>
+
+
+</mapper>
