@@ -6,7 +6,7 @@ import java.util.Date;
 public abstract class BaseEntity implements Serializable {
 
 	/**
-	 * 
+	 * zhujie
 	 */
 	private static final long serialVersionUID = 41108898611278010L;
 	private String createdUser;
