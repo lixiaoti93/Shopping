@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
- "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:与当前XML文件对应的JAVA接口 -->
 <mapper namespace="cn.tedu.store.mapper.UserMapper">
 

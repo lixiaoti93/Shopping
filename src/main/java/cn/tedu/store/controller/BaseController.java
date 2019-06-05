@@ -15,7 +15,7 @@ import cn.tedu.store.service.ex.UserNotFoundException;
 import cn.tedu.store.service.ex.UsernameConflictException;
 
 public abstract class BaseController {
-	
+
 	@ExceptionHandler(ServiceException.class)
 	@ResponseBody
 	public ResponseResult<Void> handleException(Exception e) {

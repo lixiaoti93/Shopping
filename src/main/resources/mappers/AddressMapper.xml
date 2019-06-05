@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
- "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:与当前XML文件对应的JAVA接口 -->
 <mapper namespace="cn.tedu.store.mapper.AddressMapper">
-	<!-- id:该节点对应的抽象方法的名称 parameterType:对应的抽象方法的参数的数据类型 
-	useGeneratedKeys 表示需要获取自动生成的主健（通常都是自动递增的id） 
-		keyProperty表示获取了主键的值（id的值） -->
-	<!-- 插入收获地址数据 -->
-	<!-- Integer insert(Address address) -->
-	<insert id="insert" parameterType="cn.tedu.store.entity.Address" useGeneratedKeys="true" 
-	keyProperty="id" >
+    <!-- id:该节点对应的抽象方法的名称 parameterType:对应的抽象方法的参数的数据类型
+    useGeneratedKeys 表示需要获取自动生成的主健（通常都是自动递增的id）
+        keyProperty表示获取了主键的值（id的值） -->
+    <!-- 插入收获地址数据 -->
+    <!-- Integer insert(Address address) -->
+    <insert id="insert" parameterType="cn.tedu.store.entity.Address" useGeneratedKeys="true"
+            keyProperty="id">
 	INSERT INTO t_address(uid,recv_name,recv_province,recv_city,recv_area,recv_district,
 	recv_address,recv_phone,recv_tel,recv_zip,
 	recv_tag,is_default,created_user,created_time,modified_user,modified_time)
@@ -20,33 +20,31 @@
 	#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime})
 	
 	</insert>
-	<!-- 获取用户的收获地址数量 -->
-	<!-- Integer getCountByUid(Integer uid) -->
-	<select id="getCountByUid" resultType="java.lang.Integer">
+    <!-- 获取用户的收获地址数量 -->
+    <!-- Integer getCountByUid(Integer uid) -->
+    <select id="getCountByUid" resultType="java.lang.Integer">
 	select count(id) from t_address where uid=#{uid}
 	</select>
-	<!-- 根据uid获取全部地址信息 -->
-	<!-- List<Address> getList(Integer uid) -->
-	<select id="getList" resultType="cn.tedu.store.entity.Address"> 
+    <!-- 根据uid获取全部地址信息 -->
+    <!-- List<Address> getList(Integer uid) -->
+    <select id="getList" resultType="cn.tedu.store.entity.Address">
 	select id,uid,recv_name as recvName,recv_district as recvDistrict,
 	recv_address as recvAddress,recv_phone as recvPhone,recv_tel as recvTel,recv_zip as recvZip,
 	recv_tag as recvTag,is_default as isDefault
 	from t_address
 	where uid=#{uid} order by is_default desc,id desc
 	</select>
-	<!-- 设置所有的地址为非默认收货地址 -->
-	<!-- Integer setNonDefault(Integer uid) -->
-	<update id="setNonDefault">
+    <!-- 设置所有的地址为非默认收货地址 -->
+    <!-- Integer setNonDefault(Integer uid) -->
+    <update id="setNonDefault">
 	update t_address set is_default=0 where uid=#{uid}
 	</update>
-	
-	<!-- 设置某个地址为默认收货地址 -->
-	<!-- Integer setDefault(@Param("uid")Integer uid,@Param("id")Integer id) -->
-	<update id="setDefault">
+
+    <!-- 设置某个地址为默认收货地址 -->
+    <!-- Integer setDefault(@Param("uid")Integer uid,@Param("id")Integer id) -->
+    <update id="setDefault">
 	update t_address set is_default=1 where uid=#{uid} and id=#{id}
 	</update>
-	
-	
-	
+
 
 </mapper>
